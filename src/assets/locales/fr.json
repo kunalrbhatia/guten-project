@@ -1,0 +1,13 @@
+{
+  "hello": "Bonjour, le monde !",
+  "lbl_lang_select": "Sélectionner la langue",
+  "lbl_heading": "Projet Gutenberg",
+  "lbl_title": "Un site de catalogage social qui vous permet de rechercher librement sa base de données de livres, annotations et critiques.",
+  "lbl_fiction": "fiction",
+  "lbl_drama": "drame",
+  "lbl_humor": "humour",
+  "lbl_politics": "politique",
+  "lbl_philosophy": "philosophie",
+  "lbl_history": "histoire",
+  "lbl_adventure": "aventure"
+}
