@@ -6,7 +6,7 @@ interface Book {
   title: string;
   authors: Author[];
   cover: string | undefined;
-  onClick: (id: number) => void;
+  onClick: () => void;
 }
 const IndividualBook = ({ id, title, authors, cover, onClick }: Book) => {
   let author = null;
@@ -14,14 +14,7 @@ const IndividualBook = ({ id, title, authors, cover, onClick }: Book) => {
     author = get(authors, '0', null) || null;
   }
   return (
-    <div
-      key={id}
-      onClick={() => {
-        onClick(id);
-      }}
-      className="cursor-pointer"
-      title={title}
-    >
+    <div key={id} onClick={onClick} className="cursor-pointer" title={title}>
       {cover && (
         <img
           src={cover}
