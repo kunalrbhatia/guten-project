@@ -7,7 +7,7 @@ import DetailsPage from 'components/DetailsPage/DetailsPage';
 function App() {
   return (
     <Router>
-      <div className="App w-full p-6 bg-gutenLightGrey">
+      <div className="App w-full p-6">
         <div className="flex justify-end w-full mb-4">
           <LanguageSwitcher />
         </div>

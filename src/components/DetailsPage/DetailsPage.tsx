@@ -4,10 +4,38 @@ import BackIcon from 'assets/images/svg/Back.svg';
 import getTranslation from 'utils/common';
 import { useTranslation } from 'react-i18next';
 import SearchBar from 'components/SearchBar/SearchBar';
+import { useEffect, useState } from 'react';
+import { BASE_URL } from 'utils/constants';
+import BookShelf from 'components/BookShelf/BookShelf';
 const DetailHeader = () => {
   const { t } = useTranslation();
   const { title } = useParams();
   const capitalizeTitle = capitalize(t(getTranslation(title ? title : '')));
+  const [books, setBooks] = useState<Book[] | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string | null>(null);
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        let response;
+        if (title) {
+          response = await fetch(`${BASE_URL}/books?topic=${title}`);
+        }
+        if (searchTerm) {
+          response = await fetch(`${BASE_URL}/books?search=${searchTerm}`);
+        }
+        if (response) {
+          const data = await response.json();
+          setBooks(data.results);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchBooks();
+  }, [title, searchTerm]);
+  useEffect(() => {
+    console.log(books);
+  }, [books]);
   return (
     <>
       <div className="flex items-center justify-between p-4 bg-white mb-4">
@@ -18,7 +46,12 @@ const DetailHeader = () => {
           </div>
         </Link>
       </div>
-      <SearchBar onSearch={() => {}} />
+      <SearchBar
+        onSearch={(value) => {
+          setSearchTerm(value);
+        }}
+      />
+      {Array.isArray(books) && books.length > 0 && <BookShelf books={books} />}
     </>
   );
 };
