@@ -25,7 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         placeholder={t('lbl_search')}
         value={searchTerm}
         onChange={handleChange}
-        className="border border-gray-300 p-2 pl-10 w-full bg-gutenLightGrey placeholder-custom"
+        className="border border-gutenLightGrey focus:border-gutenBlue focus:outline-none p-2 pl-10 pr-[10px] w-full bg-gutenLightGrey placeholder-custom rounded-[4px] h-[40px]"
       />
       <button
         onClick={handleIconClick}
