@@ -7,27 +7,32 @@ import SearchBar from 'components/SearchBar/SearchBar';
 import { useEffect, useState } from 'react';
 import { BASE_URL } from 'utils/constants';
 import BookShelf from 'components/BookShelf/BookShelf';
+import FullPagePreloader from 'components/FullPagePreloader/FullPagePreloader';
 const DetailHeader = () => {
   const { t } = useTranslation();
   const { title } = useParams();
   const capitalizeTitle = capitalize(t(getTranslation(title ? title : '')));
   const [books, setBooks] = useState<Book[] | null>(null);
   const [searchTerm, setSearchTerm] = useState<string | null>(null);
+  const [isShowLoader, setIsShowLoader] = useState<boolean>(false);
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         let response;
         if (title) {
+          setIsShowLoader(true);
           response = await fetch(
             `${BASE_URL}/books?topic=${title}&mime_type=image%2Fjpeg`
           );
         }
         if (searchTerm) {
+          setIsShowLoader(true);
           response = await fetch(
             `${BASE_URL}/books?search=${searchTerm}&mime_type=image%2Fjpeg`
           );
         }
         if (response) {
+          setIsShowLoader(false);
           const data = await response.json();
           setBooks(data.results);
         }
@@ -55,6 +60,7 @@ const DetailHeader = () => {
           setSearchTerm(value);
         }}
       />
+      {isShowLoader && <FullPagePreloader />}
       {Array.isArray(books) && books.length > 0 && <BookShelf books={books} />}
     </>
   );
