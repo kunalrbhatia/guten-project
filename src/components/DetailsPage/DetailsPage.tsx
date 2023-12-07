@@ -18,10 +18,14 @@ const DetailHeader = () => {
       try {
         let response;
         if (title) {
-          response = await fetch(`${BASE_URL}/books?topic=${title}`);
+          response = await fetch(
+            `${BASE_URL}/books?topic=${title}&mime_type=image%2Fjpeg`
+          );
         }
         if (searchTerm) {
-          response = await fetch(`${BASE_URL}/books?search=${searchTerm}`);
+          response = await fetch(
+            `${BASE_URL}/books?search=${searchTerm}&mime_type=image%2Fjpeg`
+          );
         }
         if (response) {
           const data = await response.json();
