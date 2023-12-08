@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { get, startCase, upperCase } from 'lodash';
+import { get, startCase, truncate } from 'lodash';
 import './IndividualBook.styles.css';
 
 interface Book {
@@ -27,9 +27,14 @@ const IndividualBook: React.FC<Book> = ({
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
-
+  const formatedTitle = truncate(title, { length: 20 }).toLocaleUpperCase();
   return (
-    <div key={id} onClick={onClick} className="cursor-pointer" title={title}>
+    <div
+      key={id}
+      onClick={onClick}
+      className="cursor-pointer individual-book-container"
+      title={title}
+    >
       {cover && (
         <div
           className={`w-[114px] h-[162px] mb-2 relative overflow-hidden rounded-[8px] custom-shadow`}
@@ -49,9 +54,9 @@ const IndividualBook: React.FC<Book> = ({
           />
         </div>
       )}
-      <h3 className="text-extraSmall font-Montserrat-Regular mb-1 truncate">
-        {upperCase(title)}
-      </h3>
+      <div className="text-extraSmall font-Montserrat-Regular mb-1">
+        {formatedTitle}
+      </div>
       {author && (
         <p className="text-gutenDarkGrey text-extraSmall font-Montserrat-Regular">
           {startCase(author.name)}

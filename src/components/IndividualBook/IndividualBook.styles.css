@@ -1,3 +1,9 @@
 .custom-shadow {
     box-shadow: 0 2px 5px 0 rgba(211, 209, 238, 0.5);
 }
+.individual-book-container {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
